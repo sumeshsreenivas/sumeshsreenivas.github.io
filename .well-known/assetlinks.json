@@ -1,10 +1,5 @@
 [{
   "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": “com.adcb.cbgdigi”,
-    "sha256_cert_fingerprints": [
-      "F8:55:72:DC:67:94:52:D1:63:55:18:5C:63:BC:CF:A7:5F:7A:47:CB:FF:FD:FF:C0:5A:FF:93:EF:75:36:22:CD",
-    ]
-  }
+  "target" : { "namespace": "android_app", "package_name": "com.adcb.cbgdigi",
+               "sha256_cert_fingerprints": ["F8:55:72:DC:67:94:52:D1:63:55:18:5C:63:BC:CF:A7:5F:7A:47:CB:FF:FD:FF:C0:5A:FF:93:EF:75:36:22:CD"] }
 }]
