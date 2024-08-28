@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open App or Redirect to Store</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      p {
+        font-size: 1.2em;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Redirecting...</h1>
+    <p>If your app does not open automatically, <a id="fallback-link" href="#">click here</a> to install it. </p>
+    <script>
+      // Function to open the app or redirect to the store
+      function getQueryParam(param) {
+        var urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      function openAppOrRedirect() {
+        var referralCode = getQueryParam("referralCode");
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        // Check if the device is iOS
+        if (/iPhone|iPad|iPod/i.test(userAgent)) {
+          // Open the app using a custom URL scheme or redirect to the App Store
+          window.location.href = 'com.adcb.cbgdigi://invite?referralCode=${referralCode};'
+          setTimeout(function() {
+            window.location.href = "https://apps.apple.com/ae/app/adcb-hayyak/id1436686356";
+          }, 2000);
+        }
+        // Check if the device is Android
+        else if (/android/i.test(userAgent)) {
+          // Open the app using a custom URL scheme or redirect to the Play Store
+          window.location.href = 'intent://invite?referralCode=' + referralCode + '#Intent;scheme=com.adcb.cbgdigi;package=com.adcb.cbgdigi;end;'
+          setTimeout(function() {
+            window.location.href = "https://play.google.com/store/apps/details?id=com.adcb.cbgdigi&hl=en&referrer=referralCode=" + referralCode;
+          }, 2000);
+        }
+        // For other devices or if detection fails, fallback to a generic page or website
+        else {
+          document.getElementById("fallback-link").href = "https://www.adcb.com/en/personal/";
+          window.location.href = "https://www.adcb.com/";
+        }
+      }
+      // Example referral code, replace with dynamic code as needed
+      // var referralCode = "47bb9168-f7dc-4d23-9d09-f6030829da0f";
+      openAppOrRedirect();
+    </script>
+  </body>
+</html>
