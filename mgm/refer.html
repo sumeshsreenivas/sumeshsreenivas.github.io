@@ -45,15 +45,15 @@
         // Check if the device is Android
         else if (/android/i.test(userAgent)) {
           // Open the app using a custom URL scheme or redirect to the Play Store
-          window.location.href = 'intent://invite?referralCode=' + referralCode + '#Intent;scheme=com.adcb.cbgdigi;package=com.adcb.cbgdigi;end;'
+        //  window.location.href = 'intent://invite?referralCode=' + referralCode + '#Intent;scheme=com.adcb.cbgdigi;package=com.adcb.cbgdigi;end;'
           setTimeout(function() {
             window.location.href = "https://play.google.com/store/apps/details?id=com.adcb.cbgdigi&hl=en&referrer=referralCode=" + referralCode;
-          }, 2000);
+          }, 3000);
         }
         // For other devices or if detection fails, fallback to a generic page or website
         else {
           document.getElementById("fallback-link").href = "https://www.adcb.com/en/personal/";
-          window.location.href = "https://www.adcb.com/";
+          window.location.href = "https://onlineadcbapps.adcb.com/apps/Hayyak/";
         }
       }
       // Example referral code, replace with dynamic code as needed
