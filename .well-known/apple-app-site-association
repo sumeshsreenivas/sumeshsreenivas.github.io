@@ -1,0 +1,11 @@
+{
+  "applinks": {
+   "apps": [],
+   "details": [
+    {
+     "appID": "RPDRT54S5A.com.adcbmobiletest.deeplinktest",
+     "paths": [ "*" ]
+    }
+  ]
+ }
+}
