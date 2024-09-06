@@ -31,6 +31,41 @@
         return urlParams.get(param);
       }
 
+      function setCookie(cname,cvalue,exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkCookie() {
+  let user = getCookie("username");
+  if (user != "") {
+    alert("Welcome again " + user);
+  } else {
+     user = prompt("Please enter your name:","");
+     if (user != "" && user != null) {
+       setCookie("username", user, 30);
+     }
+  }
+}
+
       function openAppOrRedirect() {
         var referralCode = getQueryParam("referralcode");
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -48,8 +83,9 @@
           // var expireTime = time + 1000*3600;
           // now.setTime(expireTime);
           // document.cookie = 'yourKey=' + custom + ';expires='+now.toGMTString()+';domain=https://sumeshsreenivas.github.io/';
-          document.cookie = "username=John Doe";
-          alert("In iOS");
+          //document.cookie = "username=John Doe";
+         // alert("In iOS");
+          checkCookie();
         }
         // Check if the device is Android
         else if (/android/i.test(userAgent)) {
