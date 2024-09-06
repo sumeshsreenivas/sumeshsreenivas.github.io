@@ -38,33 +38,33 @@
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
+// function getCookie(cname) {
+//   let name = cname + "=";
+//   let decodedCookie = decodeURIComponent(document.cookie);
+//   let ca = decodedCookie.split(';');
+//   for(let i = 0; i < ca.length; i++) {
+//     let c = ca[i];
+//     while (c.charAt(0) == ' ') {
+//       c = c.substring(1);
+//     }
+//     if (c.indexOf(name) == 0) {
+//       return c.substring(name.length, c.length);
+//     }
+//   }
+//   return "";
+// }
 
-function checkCookie() {
-  let user = getCookie("username");
-  if (user != "") {
-    alert("Welcome again " + user);
-  } else {
-     user = prompt("Please enter your name:","");
-     if (user != "" && user != null) {
-       setCookie("username", user, 30);
-     }
-  }
-}
+// function checkCookie() {
+//   let user = getCookie("username");
+//   if (user != "") {
+//     alert("Welcome again " + user);
+//   } else {
+//      user = prompt("Please enter your name:","");
+//      if (user != "" && user != null) {
+//        setCookie("username", user, 1);
+//      }
+//   }
+// }
 
       function openAppOrRedirect() {
         var referralCode = getQueryParam("referralcode");
@@ -85,7 +85,7 @@ function checkCookie() {
           // document.cookie = 'yourKey=' + custom + ';expires='+now.toGMTString()+';domain=https://sumeshsreenivas.github.io/';
           //document.cookie = "username=John Doe";
          // alert("In iOS");
-          checkCookie();
+          setCookie("referral", "12345", 1);
         }
         // Check if the device is Android
         else if (/android/i.test(userAgent)) {
