@@ -48,6 +48,7 @@
           var expireTime = time + 1000*3600;
           now.setTime(expireTime);
           document.cookie = 'yourKey=' + custom + ';expires='+now.toGMTString()+';domain=https://sumeshsreenivas.github.io/';
+          alert("In iOS");
         }
         // Check if the device is Android
         else if (/android/i.test(userAgent)) {
