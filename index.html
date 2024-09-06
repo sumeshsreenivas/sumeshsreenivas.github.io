@@ -31,16 +31,36 @@
         return urlParams.get(param);
       }
 
+       function getCookie(name) {
+   var re = new RegExp(name + "=([^;]+)");
+   var value = re.exec(document.cookie);
+   return (value != null) ? unescape(value[1]) : null;
+  }
+
       function openAppOrRedirect() {
         var referralCode = getQueryParam("referralCode");
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
         // Check if the device is iOS
         if (/iPhone|iPad|iPod/i.test(userAgent)) {
           // Open the app using a custom URL scheme or redirect to the App Store
-          window.location.href = 'com.adcb.cbgdigi://invite?referralCode=${referralCode};'
-          setTimeout(function() {
-            window.location.href = "https://apps.apple.com/ae/app/adcb-hayyak/id1436686356";
-          }, 2000);
+          // window.location.href = 'com.adcb.cbgdigi://invite?referralCode=${referralCode};'
+          // setTimeout(function() {
+          //   window.location.href = "https://apps.apple.com/ae/app/adcb-hayyak/id1436686356";
+          // }, 2000);
+
+      
+
+ 
+
+  var m = getCookie("yourKey");
+
+  if(m){
+   location.href = m;
+  } else {
+   document.writeln("No Cookies...");
+  }
+
+
         }
         // Check if the device is Android
         else if (/android/i.test(userAgent)) {
