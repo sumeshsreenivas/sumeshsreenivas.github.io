@@ -49,10 +49,19 @@
           // }, 2000);
 
       
-
+ // var custom = "yourapp://111111";
+ //          var now = new Date();
+ //          var time = now.getTime();
+ //          var expireTime = time + 1000*3600;
+ //          now.setTime(expireTime);
+ //          document.cookie = 'yourKey=' + custom + ';
+ //          expires='+now.toGMTString()+';
+ //          domain=https://sumeshsreenivas.github.io/';
  
 
-  var m = getCookie("yourKey");
+  var m = getCookie("yourapp://111111");
+
+  //var m = getCookie("yourKey=yourapp://111111");
 
   if(m){
    location.href = m;
