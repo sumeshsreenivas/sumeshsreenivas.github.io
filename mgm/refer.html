@@ -38,6 +38,23 @@
           document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
       }
 
+      function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+    }
+
+
       function openAppOrRedirect() {
         var referralCode = getQueryParam("referralcode");
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -45,6 +62,7 @@
         if (/iPhone|iPad|iPod/i.test(userAgent)) {
           // Open the app using a custom URL scheme or redirect to the App Store
           setCookie("referral", "2223344", 1);
+          alert("Copied!: "+getCookie("referral"));
         }
         // Check if the device is Android
         else if (/android/i.test(userAgent)) {
