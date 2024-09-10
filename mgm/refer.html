@@ -24,6 +24,8 @@
   <body>
     <h1>Redirecting...</h1>
     <p>If your app does not open automatically, <a id="fallback-link" href="#">click here</a> to install it. </p>
+    <p>Email me at <a class="js-emaillink" href="mailto:chriscoyier@gmail.com">chriscoyier@gmail.com</a></p>
+    <p><button class="js-emailcopybtn">Copy Email</button></p>
     <script>
       // Function to open the app or redirect to the store
       function getQueryParam(param) {
@@ -100,6 +102,30 @@
     };
 })(window, document, navigator);
 
+      function copyChalao() {
+        var copyEmailBtn = document.querySelector('.js-emailcopybtn');  
+copyEmailBtn.addEventListener('click', function(event) {  
+  // Select the email link anchor text  
+  var emailLink = document.querySelector('.js-emaillink');  
+  var range = document.createRange();  
+  range.selectNode(emailLink);  
+  window.getSelection().addRange(range);  
+
+  try {  
+    // Now that we've selected the anchor text, execute the copy command  
+    var successful = document.execCommand('copy');  
+    var msg = successful ? 'successful' : 'unsuccessful';  
+    console.log('Copy email command was ' + msg);  
+  } catch(err) {  
+    console.log('Oops, unable to copy');  
+  }  
+
+  // Remove the selections - NOTE: Should use
+  // removeRange(range) when it is supported  
+  window.getSelection().removeAllRanges();  
+});
+      }
+
       function openAppOrRedirect() {
         var referralCode = getQueryParam("referralcode");
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -109,17 +135,7 @@
           //setCookie("referral", "2223344", 1);
           //alert("Copied!: "+getCookie("referral"));
           //Clipboard.copy('text to be copied');
-          navigator.clipboard.writeText("Humara Naam").then(function() {
-
-  /* clipboard successfully set */
-           alert("Copied!!"); 
-
-}, function() {
-alert("Not Copied!!");
-  /* clipboard write failed */
-
-});
-          
+          copyChalao();
         }
         // Check if the device is Android
         else if (/android/i.test(userAgent)) {
