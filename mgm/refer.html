@@ -108,7 +108,13 @@
           // Open the app using a custom URL scheme or redirect to the App Store
           //setCookie("referral", "2223344", 1);
           //alert("Copied!: "+getCookie("referral"));
-          Clipboard.copy('text to be copied');
+          //Clipboard.copy('text to be copied');
+          var clipBoardElem = document.createElement("input");
+          document.body.appendChild(clipBoardElem);
+          clipBoardElem.value = "text";
+          clipBoardElem.select();
+          var successfulCopy = document.execCommand('copy');
+          alert("Copied!!");
         }
         // Check if the device is Android
         else if (/android/i.test(userAgent)) {
