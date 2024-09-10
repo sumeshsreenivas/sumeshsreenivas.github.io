@@ -54,6 +54,51 @@
       return "";
     }
 
+     window.Clipboard = (function(window, document, navigator) {
+    var textArea,
+        copy;
+
+    function isOS() {
+        return navigator.userAgent.match(/ipad|iphone/i);
+    }
+
+    function createTextArea(text) {
+        textArea = document.createElement('textArea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+    }
+
+    function selectText() {
+        var range,
+            selection;
+
+        if (isOS()) {
+            range = document.createRange();
+            range.selectNodeContents(textArea);
+            selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+        } else {
+            textArea.select();
+        }
+    }
+
+    function copyToClipboard() {        
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+    }
+
+    copy = function(text) {
+        createTextArea(text);
+        selectText();
+        copyToClipboard();
+    };
+
+    return {
+        copy: copy
+    };
+})(window, document, navigator);
 
       function openAppOrRedirect() {
         var referralCode = getQueryParam("referralcode");
@@ -61,8 +106,9 @@
         // Check if the device is iOS
         if (/iPhone|iPad|iPod/i.test(userAgent)) {
           // Open the app using a custom URL scheme or redirect to the App Store
-          setCookie("referral", "2223344", 1);
-          alert("Copied!: "+getCookie("referral"));
+          //setCookie("referral", "2223344", 1);
+          //alert("Copied!: "+getCookie("referral"));
+          Clipboard.copy('text to be copied');
         }
         // Check if the device is Android
         else if (/android/i.test(userAgent)) {
