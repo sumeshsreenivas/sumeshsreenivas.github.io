@@ -1,160 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html>
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open App or Redirect to Store</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 50px;
-      }
-
-      h1 {
-        color: #333;
-      }
-
-      p {
-        font-size: 1.2em;
-        color: #666;
-      }
-    </style>
+    <title>Universal Link </title>
   </head>
   <body>
-    <h1>Redirecting...</h1>
-    <p>If your app does not open automatically, <a id="fallback-link" href="#">click here</a> to install it. </p>
-    <p>Email me at <a class="js-emaillink" href="mailto:chriscoyier@gmail.com">chriscoyier@gmail.com</a></p>
-    <p><button class="js-emailcopybtn">Copy Email</button></p>
+    <h1>MEMBER GET MEMBER</h1>
+    <p><button class="js-getreferralCopied" id="copyAndRedirect">Get the app</button></p><br>
+    <p><button class="js-downloadappbutton" id="goToAppStore">Download App</button></p>
+    <a href="myapp://" target="_blank" id="urlschemelink">Go to app</a>
     <script>
-      // Function to open the app or redirect to the store
+        // Function to open the app or redirect to the store
+        // Function to open the app or redirect to the store
       function getQueryParam(param) {
-        var urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
+        //var urlParams = new URLSearchParams(window.location.search);
+        //return urlParams.get(param);
+        return window.location.href;
       }
-
-      function setCookie(cname,cvalue,exdays) {
-          const d = new Date();
-          d.setTime(d.getTime() + (exdays*24*60*60*1000));
-          let expires = "expires=" + d.toUTCString();
-          document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-      }
-
-      function getCookie(cname) {
-      let name = cname + "=";
-      let decodedCookie = decodeURIComponent(document.cookie);
-      let ca = decodedCookie.split(';');
-      for(let i = 0; i < ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-          }
-      }
-      return "";
-    }
-
-     window.Clipboard = (function(window, document, navigator) {
-    var textArea,
-        copy;
-
-    function isOS() {
-        return navigator.userAgent.match(/ipad|iphone/i);
-    }
-
-    function createTextArea(text) {
-        textArea = document.createElement('textArea');
-        textArea.value = text;
-        document.body.appendChild(textArea);
-    }
-
-    function selectText() {
-        var range,
-            selection;
-
-        if (isOS()) {
-            range = document.createRange();
-            range.selectNodeContents(textArea);
-            selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            textArea.setSelectionRange(0, 999999);
-        } else {
-            textArea.select();
-        }
-    }
-
-    function copyToClipboard() {        
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-    }
-
-    copy = function(text) {
-        createTextArea(text);
-        selectText();
-        copyToClipboard();
-    };
-
-    return {
-        copy: copy
-    };
-})(window, document, navigator);
-
-      function copyChalao() {
-        var copyEmailBtn = document.querySelector('.js-emailcopybtn');  
-copyEmailBtn.addEventListener('click', function(event) {  
-  // Select the email link anchor text  
-  var emailLink = document.querySelector('.js-emaillink');  
-  var range = document.createRange();  
-  range.selectNode(emailLink);  
-  window.getSelection().addRange(range);  
-
-  try {  
-    // Now that we've selected the anchor text, execute the copy command  
-    var successful = document.execCommand('copy');  
-    var msg = successful ? 'successful' : 'unsuccessful';  
-    console.log('Copy email command was ' + msg);  
-  } catch(err) {  
-    console.log('Oops, unable to copy');  
-  }  
-
-  // Remove the selections - NOTE: Should use
-  // removeRange(range) when it is supported  
-  window.getSelection().removeAllRanges();  
-});
-      }
-
       function openAppOrRedirect() {
-        var referralCode = getQueryParam("referralcode");
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        // Check if the device is iOS
-        if (/iPhone|iPad|iPod/i.test(userAgent)) {
-          // Open the app using a custom URL scheme or redirect to the App Store
-          //setCookie("referral", "2223344", 1);
-          //alert("Copied!: "+getCookie("referral"));
-          //Clipboard.copy('text to be copied');
-          copyChalao();
-        }
-        // Check if the device is Android
-        else if (/android/i.test(userAgent)) {
-          // Open the app using a custom URL scheme or redirect to the Play Store
-        //  window.location.href = 'intent://invite?referralCode=' + referralCode + '#Intent;scheme=com.adcb.cbgdigi;package=com.adcb.cbgdigi;end;'
-          setTimeout(function() {
-            //window.location.href = "https://play.google.com/store/apps/details?id=com.jjss.applinktest&hl=en&referrer=referralCode=" + referralCode;
-            window.location.href = "https://play.google.com/store/apps/details?id=com.jjss.applinktest&referrer=referralCode%3D"+referralCode+"%26source%3DHayyakMobile"
-          }, 2000);
-        }
-        // For other devices or if detection fails, fallback to a generic page or website
-        else {
-          document.getElementById("fallback-link").href = "https://www.adcb.com/en/personal/";
-          window.location.href = "https://onlineadcbapps.adcb.com/apps/Hayyak/";
-        }
+          // Check if the device is iOS
+          //if (/iPhone|iPad|iPod/i.test(userAgent)) {
+            // Open the app using a custom URL scheme or redirect to the App Store
+            // setTimeout(function() {
+            //   window.location.href = "https://apps.apple.com/ae/app/cut-the-rope/id1024506959";
+            // }, 2000);
+
+            // alert("referralCode"+referralCode);
+         // }
+        //document.getElementById("copyAndRedirect").click();
       }
-      // Example referral code, replace with dynamic code as needed
-      // var referralCode = "47bb9168-f7dc-4d23-9d09-f6030829da0f";
-      openAppOrRedirect();
-    </script>
-  </body>
+
+      function copyReferralToClipboard() {
+        var downloadAppBtn = document.querySelector('.js-getreferralCopied');  
+        downloadAppBtn.addEventListener('click', function(event) {  
+          var referralCode = getQueryParam("referralcode"); 
+          copyToClipboard(referralCode);
+          document.getElementById("goToAppStore").click();
+        });
+
+      }
+
+      function copyToClipboard(string) {
+        let textarea;
+        let result;
+
+        try {
+          textarea = document.createElement('textarea');
+          textarea.setAttribute('readonly', true);
+          textarea.setAttribute('contenteditable', true);
+      textarea.style.position = 'fixed'; // prevent scroll from jumping to the bottom when focus is set.
+      textarea.value = string;
+
+      document.body.appendChild(textarea);
+
+      textarea.focus();
+      textarea.select();
+
+      const range = document.createRange();
+      range.selectNodeContents(textarea);
+
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+
+      textarea.setSelectionRange(0, textarea.value.length);
+      result = document.execCommand('copy');
+    } catch (err) {
+      console.error(err);
+      result = null;
+    } finally {
+      document.body.removeChild(textarea);
+    }
+
+    // manual copy fallback using prompt
+    if (!result) {
+      const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+      const copyHotkey = isMac ? '⌘C' : 'CTRL+C';
+      result = prompt(`Press ${copyHotkey}`, string); // eslint-disable-line no-alert
+      if (!result) {
+        return false;
+      }
+    }
+    return true;
+  }
+  function downloadAppFromAppStore() {
+    var downloadAppBtn = document.querySelector('.js-downloadappbutton');  
+    document.getElementById("goToAppStore").style.display="none";
+    downloadAppBtn.addEventListener('click', function(event) {  
+      window.location.href = "https://apps.apple.com/ae/app/cut-the-rope/id1024506959";
+    });
+  }
+
+  function checkAppIsPresentAndRedirectToApp() {
+    var referralCode = getQueryParam("referralcode");
+    var a = document.getElementById('urlschemelink'); //or grab it by tagname etc
+    a.href = "myapp://"+referralCode;
+    document.getElementById('urlschemelink').click();
+  }
+
+        // Example referral code, replace with dynamic code as needed
+        // var referralCode = "47bb9168-f7dc-4d23-9d09-f6030829da0f";
+  downloadAppFromAppStore();
+  copyReferralToClipboard();
+  openAppOrRedirect();
+  //checkAppIsPresentAndRedirectToApp();
+</script>
+</body>
 </html>
