@@ -69,15 +69,14 @@
             var downloadAppBtn = document.getElementById('downloadHayyak');  
             downloadAppBtn.addEventListener('click', function(event) {  
                 event.preventDefault(); // Prevent default anchor behavior
-                var referralCode = getQueryParam("referralcode"); 
+                var referralCode = getQueryParam(); 
                 copyToClipboard(referralCode);
                 window.location.href = downloadAppBtn.href; // Navigate to the app store link
             });
         }
 
-        function getQueryParam(param) {
-            var urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
+        function getQueryParam() {
+            return window.location.href;
         }
 
         function copyToClipboard(string) {
