@@ -10,7 +10,7 @@
     <h4>Download the ADCB Hayyak app now!</h4>
     <div>
         <a style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;">
-      <img id="donwloadHayyak" src="https://apple-resources.s3.amazonaws.com/media-badges/download-on-the-app-store/black/en-us.svg"
+      <img id="downloadHayyak" src="https://apple-resources.s3.amazonaws.com/media-badges/download-on-the-app-store/black/en-us.svg"
          alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;">
    </a>
   <!--  <span class="arrow">➡️</span> -->
@@ -21,13 +21,14 @@
     <p>Instant Account Opening & Earn exciting rewards upto AED 1000 Welcome Bonus. Get our app now and enjoy exclusive features!</p>
 <script>
 	function copyReferralToClipboard() {
-        var downloadAppBtn = document.getElementById('donwloadHayyak');  
+        var downloadAppBtn = document.getElementById('downloadHayyak');  
         downloadAppBtn.addEventListener('click', function(event) {  
           var referralCode = getQueryParam("referralcode"); 
           copyToClipboard(referralCode);
 	 //https://apps.apple.com/ae/app/adcb-hayyak/id1436686356
           window.location.href = "https://apps.apple.com/ae/app/cut-the-rope/id1024506959";
         });
+      }
 
       function getQueryParam(param) {
         //var urlParams = new URLSearchParams(window.location.search);
