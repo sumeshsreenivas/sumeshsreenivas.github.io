@@ -1,109 +1,126 @@
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <title>Universal Link </title>
-  </head>
-  <body>
-    <h1>MEMBER GET MEMBER</h1>
-    <p><button class="js-getreferralCopied" id="copyAndRedirect">Get the app</button></p><br>
-    <p><button class="js-downloadappbutton" id="goToAppStore">Download App</button></p>
-    <a href="myapp://" target="_blank" id="urlschemelink">Go to app</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download the ADCB Hayyak App Now!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff; /* Set the background to white */
+        }
+        h3, h4 {
+            color: #333;
+        }
+        .header-container {
+            display: flex;
+            justify-content: center; /* Center the button horizontally */
+            margin: 20px 0; /* Add margin for spacing */
+        }
+        .download-button {
+            display: inline-block;
+            overflow: hidden;
+            border-radius: 13px;
+            width: 150px;
+            height: 83px;
+            margin: 0 10px; /* Add margin between buttons */
+        }
+        .download-button img {
+            border-radius: 13px;
+            width: 100%; /* Ensure the image fills the button */
+            height: auto; /* Maintain aspect ratio */
+        }
+        #hayyakPasteboardConsent {
+            max-width: 100%; /* Allow the image to be responsive */
+            height: auto; /* Maintain aspect ratio */
+            margin: 20px 0; /* Add margin for spacing */
+        }
+        .image-container {
+            display: flex;
+            justify-content: center; /* Center the image horizontally */
+            margin: 20px 0; /* Add margin for spacing */
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <a class="download-button c-tcit-download" id="iOS">
+            <img src="https://www.adcb.com/newadcb/images/small_logo.png" alt="App Store">
+        </a> 
+    </div>
+    
+    <h2>Start banking easily with ADCB. Get an ADCB account, credit card or personal loan instantly.</h2>
+    <h3>Please <strong>allow pasting</strong> after downloading the app from the App Store. It will help us to credit your touchpoints after account opening.</h3>
+    
+    <div class="button-container">
+        <a class="download-button" id="downloadHayyak" href="https://play.google.com/store/apps/details?id=com.adcb.cbgdigi&hl=en&referrer=referralCode=" + referralCode;" aria-label="Download on the App Store">
+            <img src="https://www.omi.me/cdn/shop/files/gempages_515188559477474548-10a54cd9-afee-4fff-8727-db12c1b02a30.png?v=5732910860390368294" alt="Download on the Play Store">
+        </a>
+    </div>
+
     <script>
-        // Function to open the app or redirect to the store
-        // Function to open the app or redirect to the store
+        function copyReferralToClipboard() {
+            var downloadAppBtn = document.getElementById('downloadHayyak');  
+            downloadAppBtn.addEventListener('click', function(event) {  
+                event.preventDefault(); // Prevent default anchor behavior
+                var referralCode = getQueryParam(); 
+                copyToClipboard(referralCode);
+                window.location.href = downloadAppBtn.href; // Navigate to the app store link
+            });
+        }
+
+      // Function to open the app or redirect to the store
       function getQueryParam(param) {
-        //var urlParams = new URLSearchParams(window.location.search);
-        //return urlParams.get(param);
-        return window.location.href;
+        var urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
       }
-      function openAppOrRedirect() {
+  function openAppOrRedirect() {
+        var referralCode = getQueryParam("referralCode");
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-          // Check if the device is iOS
-          //if (/iPhone|iPad|iPod/i.test(userAgent)) {
-            // Open the app using a custom URL scheme or redirect to the App Store
-            // setTimeout(function() {
-            //   window.location.href = "https://apps.apple.com/ae/app/cut-the-rope/id1024506959";
-            // }, 2000);
-
-            // alert("referralCode"+referralCode);
-         // }
-        //document.getElementById("copyAndRedirect").click();
-      }
-
-      function copyReferralToClipboard() {
-        var downloadAppBtn = document.querySelector('.js-getreferralCopied');  
-        downloadAppBtn.addEventListener('click', function(event) {  
-          var referralCode = getQueryParam("referralcode"); 
-          copyToClipboard(referralCode);
-          document.getElementById("goToAppStore").click();
-        });
-
-      }
-
-      function copyToClipboard(string) {
-        let textarea;
-        let result;
-
-        try {
-          textarea = document.createElement('textarea');
-          textarea.setAttribute('readonly', true);
-          textarea.setAttribute('contenteditable', true);
-      textarea.style.position = 'fixed'; // prevent scroll from jumping to the bottom when focus is set.
-      textarea.value = string;
-
-      document.body.appendChild(textarea);
-
-      textarea.focus();
-      textarea.select();
-
-      const range = document.createRange();
-      range.selectNodeContents(textarea);
-
-      const sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-
-      textarea.setSelectionRange(0, textarea.value.length);
-      result = document.execCommand('copy');
-    } catch (err) {
-      console.error(err);
-      result = null;
-    } finally {
-      document.body.removeChild(textarea);
+    if (/android/i.test(userAgent)) {
+       // Open the app using a custom URL scheme or redirect to the Play Store
+          window.location.href = 'intent://invite?referralCode=' + referralCode + '#Intent;scheme=com.adcb.cbgdigi;package=com.adcb.cbgdigi;end;'
+          setTimeout(function() {
+            window.location.href = "https://play.google.com/store/apps/details?id=com.adcb.cbgdigi&hl=en&referrer=referralCode=" + referralCode;
+          }, 2000);
     }
 
-    // manual copy fallback using prompt
-    if (!result) {
-      const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-      const copyHotkey = isMac ? '⌘C' : 'CTRL+C';
-      result = prompt(`Press ${copyHotkey}`, string); // eslint-disable-line no-alert
-      if (!result) {
-        return false;
-      }
-    }
-    return true;
   }
-  function downloadAppFromAppStore() {
-    var downloadAppBtn = document.querySelector('.js-downloadappbutton');  
-    document.getElementById("goToAppStore").style.display="none";
-    downloadAppBtn.addEventListener('click', function(event) {  
-      window.location.href = "https://apps.apple.com/ae/app/cut-the-rope/id1024506959";
-    });
-  }
+        function copyToClipboard(string) {
+            let textarea;
+            let result;
 
-  function checkAppIsPresentAndRedirectToApp() {
-    var referralCode = getQueryParam("referralcode");
-    var a = document.getElementById('urlschemelink'); //or grab it by tagname etc
-    a.href = "myapp://"+referralCode;
-    document.getElementById('urlschemelink').click();
-  }
+            try {
+                textarea = document.createElement('textarea');
+                textarea.style.position = 'fixed'; // Prevent scroll from jumping to the bottom when focus is set.
+                textarea.value = string;
 
-        // Example referral code, replace with dynamic code as needed
-        // var referralCode = "47bb9168-f7dc-4d23-9d09-f6030829da0f";
-  downloadAppFromAppStore();
-  copyReferralToClipboard();
-  openAppOrRedirect();
-  //checkAppIsPresentAndRedirectToApp();
-</script>
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                result = document.execCommand('copy');
+            } catch (err) {
+                console.error(err);
+                result = null;
+            } finally {
+                document.body.removeChild(textarea);
+            }
+
+            // Manual copy fallback using prompt
+            if (!result) {
+                const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+                const copyHotkey = isMac ? '⌘C' : 'CTRL+C';
+                result = prompt(`Press ${copyHotkey}`, string);
+                if (!result) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        copyReferralToClipboard();
+    </script>
 </body>
 </html>
