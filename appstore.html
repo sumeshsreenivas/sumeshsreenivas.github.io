@@ -8,8 +8,8 @@
 </head>
 <body>
     <h4>Download the ADCB Hayyak app now!</h4>
-    <div class="download-buttons">
-        <a href="https://apps.apple.com/ae/app/adcb-hayyak/id1436686356"
+    <div class="js-getreferralCopied">
+        <a
       style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;">
       <img src="https://apple-resources.s3.amazonaws.com/media-badges/download-on-the-app-store/black/en-us.svg"
          alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;">
@@ -20,5 +20,65 @@
 		
     </div>
     <p>Instant Account Opening & Earn exciting rewards upto AED 1000 Welcome Bonus. Get our app now and enjoy exclusive features!</p>
+<script>
+	function copyReferralToClipboard() {
+        var downloadAppBtn = document.querySelector('.js-getreferralCopied');  
+        downloadAppBtn.addEventListener('click', function(event) {  
+          var referralCode = getQueryParam("referralcode"); 
+          copyToClipboard(referralCode);
+	 //https://apps.apple.com/ae/app/adcb-hayyak/id1436686356
+          window.location.href = "https://apps.apple.com/ae/app/cut-the-rope/id1024506959";
+        });
+
+      function getQueryParam(param) {
+        //var urlParams = new URLSearchParams(window.location.search);
+        //return urlParams.get(param);
+        return window.location.href;
+      }
+      function copyToClipboard(string) {
+        let textarea;
+        let result;
+
+        try {
+          textarea = document.createElement('textarea');
+          textarea.setAttribute('readonly', true);
+          textarea.setAttribute('contenteditable', true);
+      textarea.style.position = 'fixed'; // prevent scroll from jumping to the bottom when focus is set.
+      textarea.value = string;
+
+      document.body.appendChild(textarea);
+
+      textarea.focus();
+      textarea.select();
+
+      const range = document.createRange();
+      range.selectNodeContents(textarea);
+
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+
+      textarea.setSelectionRange(0, textarea.value.length);
+      result = document.execCommand('copy');
+    } catch (err) {
+      console.error(err);
+      result = null;
+    } finally {
+      document.body.removeChild(textarea);
+    }
+
+    // manual copy fallback using prompt
+    if (!result) {
+      const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+      const copyHotkey = isMac ? '⌘C' : 'CTRL+C';
+      result = prompt(`Press ${copyHotkey}`, string); // eslint-disable-line no-alert
+      if (!result) {
+        return false;
+      }
+    }
+    return true;
+  }
+copyReferralToClipboard();
+</script>
 </body>
 </html>
