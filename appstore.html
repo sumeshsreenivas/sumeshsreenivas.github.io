@@ -3,80 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <h2>Start banking easily with ADCB. Get an ADCB account, credit card or personal loan instantly.</h2>
-    <title>Download the ADCB Hayyak app now!</title>
+    <title>Download the ADCB Hayyak App Now!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h2, h3, h4 {
+            color: #333;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center; /* Center the image horizontally */
+            margin: 20px 0; /* Add margin for spacing */
+        }
+        #hayyakPasteboardConsent {
+            max-width: 100%; /* Allow the image to be responsive */
+            height: auto; /* Maintain aspect ratio */
+            width: auto; /* Prevent shrinking */
+        }
+        .download-button {
+            display: inline-block;
+            overflow: hidden;
+            border-radius: 13px;
+            width: 150px;
+            height: 83px;
+            margin-right: 10px;
+        }
+        .download-button img {
+            border-radius: 13px;
+            width: 100%;
+            height: 100%;
+        }
+        .app-logo {
+            width: 200px;
+            height: 83px;
+        }
+    </style>
 </head>
 <body>
+    <h2>Start banking easily with ADCB. Get an ADCB account, credit card or personal loan instantly.</h2>
     <h3>Download the ADCB Hayyak app now!</h3>
-    <h4>Please <b>"allow pasting"</b> after download app from App Store. It will help us to credit your touchpoints after account opening</h4>
-    <img id="hayyakPasteboardConsent" src="./hayyakPasteboardConsent.png"
-         alt="Hayyak Pasteboard Prompt" style="width: 250px; height: 150px;">
-    <div>
-        <a style="display: inline-block; overflow: hidden; border-radius: 13px; width: 150px; height: 83px;">
-      <img id="downloadHayyak" src="./AppStoreImage.png"
-         alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;">
-   </a>	
+    <h4>Please <strong>allow pasting</strong> after downloading the app from the App Store. It will help us to credit your touchpoints after account opening.</h4>
+    
+    <div class="image-container">
+        <img id="hayyakPasteboardConsent" src="./hayyakPasteboardConsent.png" alt="Hayyak Pasteboard Prompt">
     </div>
-<script>
-	function copyReferralToClipboard() {
-        var downloadAppBtn = document.getElementById('downloadHayyak');  
-        downloadAppBtn.addEventListener('click', function(event) {  
-          var referralCode = getQueryParam("referralcode"); 
-          copyToClipboard(referralCode);
-	 //https://apps.apple.com/ae/app/adcb-hayyak/id1436686356
-          window.location.href = "https://apps.apple.com/ae/app/cut-the-rope/id1024506959";
-        });
-      }
+    
+    <div>
+        <a class="download-button" id="downloadHayyak" href="https://apps.apple.com/ae/app/adcb-hayyak/id1436686356" aria-label="Download on the App Store">
+            <img src="./AppStoreImage.png" alt="Download on the App Store">
+        </a>
+    </div>
 
-      function getQueryParam(param) {
-        //var urlParams = new URLSearchParams(window.location.search);
-        //return urlParams.get(param);
-        return window.location.href;
-      }
-      function copyToClipboard(string) {
-        let textarea;
-        let result;
+    <script>
+        function copyReferralToClipboard() {
+            var downloadAppBtn = document.getElementById('downloadHayyak');  
+            downloadAppBtn.addEventListener('click', function(event) {  
+                event.preventDefault(); // Prevent default anchor behavior
+                var referralCode = getQueryParam("referralcode"); 
+                copyToClipboard(referralCode);
+                window.location.href = downloadAppBtn.href; // Navigate to the app store link
+            });
+        }
 
-        try {
-          textarea = document.createElement('textarea');
-          textarea.setAttribute('readonly', true);
-          textarea.setAttribute('contenteditable', true);
-      textarea.style.position = 'fixed'; // prevent scroll from jumping to the bottom when focus is set.
-      textarea.value = string;
+        function getQueryParam(param) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
 
-      document.body.appendChild(textarea);
+        function copyToClipboard(string) {
+            let textarea;
+            let result;
 
-      textarea.focus();
-      textarea.select();
+            try {
+                textarea = document.createElement('textarea');
+                textarea.style.position = 'fixed'; // Prevent scroll from jumping to the bottom when focus is set.
+                textarea.value = string;
 
-      const range = document.createRange();
-      range.selectNodeContents(textarea);
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                result = document.execCommand('copy');
+            } catch (err) {
+                console.error(err);
+                result = null;
+            } finally {
+                document.body.removeChild(textarea);
+            }
 
-      const sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
+            // Manual copy fallback using prompt
+            if (!result) {
+                const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+                const copyHotkey = isMac ? '⌘C' : 'CTRL+C';
+                result = prompt(`Press ${copyHotkey}`, string);
+                if (!result) {
+                    return false;
+                }
+            }
+            return true;
+        }
 
-      textarea.setSelectionRange(0, textarea.value.length);
-      result = document.execCommand('copy');
-    } catch (err) {
-      console.error(err);
-      result = null;
-    } finally {
-      document.body.removeChild(textarea);
-    }
-
-    // manual copy fallback using prompt
-    if (!result) {
-      const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-      const copyHotkey = isMac ? '⌘C' : 'CTRL+C';
-      result = prompt(`Press ${copyHotkey}`, string); // eslint-disable-line no-alert
-      if (!result) {
-        return false;
-      }
-    }
-    return true;
-  }
-copyReferralToClipboard();
-</script>
+        copyReferralToClipboard();
+    </script>
 </body>
 </html>
