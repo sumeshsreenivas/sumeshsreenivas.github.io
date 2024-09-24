@@ -81,10 +81,9 @@
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
     if (/android/i.test(userAgent)) {
        // Open the app using a custom URL scheme or redirect to the Play Store
-          window.location.href = 'intent://invite?referralCode=' + referralCode + '#Intent;scheme=com.adcb.cbgdigi;package=com.adcb.cbgdigi;end;'
+        //  window.location.href = 'intent://invite?referralCode=' + referralCode + '#Intent;scheme=com.jjss.applinktest;package=com.adcb.cbgdigi;end;'
           setTimeout(function() {
-            window.location.href = "https://play.google.com/store/apps/details?id=com.adcb.cbgdigi&hl=en&referrer=referralCode=" + referralCode;
-          }, 2000);
+            window.location.href = "https://play.google.com/store/apps/details?id=com.jjss.applinktest&referrer=referralCode%3D"+referralCode}, 2000);
     }
 
   }
