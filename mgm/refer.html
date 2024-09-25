@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #ffffff; /* Set the background to white */
+            background-color: #000000; /* Set the background to white */
         }
         h3, h4 {
             color: #333;
@@ -18,6 +18,7 @@
             display: flex;
             justify-content: center; /* Center the button horizontally */
             margin: 20px 0; /* Add margin for spacing */
+            visibility: hidden;
         }
         .download-button {
             display: inline-block;
@@ -25,22 +26,26 @@
             border-radius: 13px;
             width: 150px;
             height: 83px;
+            visibility: hidden;
             margin: 0 10px; /* Add margin between buttons */
         }
         .download-button img {
             border-radius: 13px;
             width: 100%; /* Ensure the image fills the button */
             height: auto; /* Maintain aspect ratio */
+            visibility: hidden;
         }
         #hayyakPasteboardConsent {
             max-width: 100%; /* Allow the image to be responsive */
             height: auto; /* Maintain aspect ratio */
             margin: 20px 0; /* Add margin for spacing */
+            visibility: hidden;
         }
         .image-container {
             display: flex;
             justify-content: center; /* Center the image horizontally */
             margin: 20px 0; /* Add margin for spacing */
+            visibility: hidden;
         }
     </style>
 </head>
@@ -83,7 +88,7 @@
        // Open the app using a custom URL scheme or redirect to the Play Store
         //  window.location.href = 'intent://invite?referralCode=' + referralCode + '#Intent;scheme=com.jjss.applinktest;package=com.adcb.cbgdigi;end;'
           setTimeout(function() {
-            window.location.href = "https://play.google.com/store/apps/details?id=com.jjss.applinktest&referrer=referralCode%3D"+referralCode}, 2000);
+            window.location.href = "https://play.google.com/store/apps/details?id=com.adcb.cbgdigi&referrer=referralCode%3D"+referralCode}, 100);
     }
 
   }
