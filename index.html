@@ -40,30 +40,25 @@
     Create Password
   </button>
 
-  <script>
-    document
-      .getElementById("createPasswordBtn")
-      .addEventListener("click", function () {
+ <script>
+  document
+    .getElementById("createPasswordBtn")
+    .addEventListener("click", function () {
 
-        // Trigger custom JS event
-        const event = new CustomEvent("CREATE_ATTEMPT_PASSWORD", {
-          detail: {
-            timestamp: Date.now()
-          }
-        });
-
-        window.dispatchEvent(event);
-
-        console.log("CREATE_ATTEMPT_PASSWORD event triggered");
+      const payload = JSON.stringify({
+        action: "CREATE_ATTEMPT_PASSWORD",
+        timestamp: Date.now()
       });
 
-    // Example listener (optional)
-    window.addEventListener(
-      "CREATE_ATTEMPT_PASSWORD",
-      function (event) {
-        console.log("Received event:", event.detail);
+      if (
+        window.NativeBridge &&
+        window.NativeBridge.createPasswordAttempt
+      ) {
+        window.NativeBridge.createPasswordAttempt(payload);
+      } else {
+        console.log("NativeBridge not available");
       }
-    );
-  </script>
+    });
+</script>
 </body>
 </html>
